@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urdu Shayeri ki Duniya - اردو شاعری کی دنیا</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Noto+Sans+Urdu:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #d81b60;
+            --secondary: #d4af37;
+            --accent: #ff6f00;
+            --light: #f5f5f5;
+            --dark: #121212;
+            --text: #333;
+            --gradient: linear-gradient(135deg, #d81b60 0%, #ec407a 100%);
+            --light-pink: #fce4ec;
+            --light-pink-gradient: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+            --curve-radius: 30px; /* Consistent curve radius for all sections */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans Urdu', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 25%, #fbc2eb 50%, #a6c1ee 75%, #c2e9fb 100%);
+            color: var(--text);
+            line-height: 1.8;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Falling Roses Background */
+        .roses-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .rose {
+            position: absolute;
+            top: -20px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 20px;
+            animation: fall linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Preloader Styles */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--light-pink-gradient);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+            border-radius: 0; /* Preloader doesn't need curve */
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-content {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: var(--curve-radius);
+            backdrop-filter: blur(10px);
+        }
+
+        .preloader-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            animation: featherFloat 2s ease-in-out infinite;
+        }
+
+        @keyframes featherFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+
+        .preloader-text {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .preloader-percentage {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: none;
+        }
+
+        .preloader-bar {
+            width: 150px;
+            height: 4px;
+            background: rgba(216, 27, 96, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .preloader-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0;
+            background: var(--primary);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--light-pink-gradient);
+            color: #000000;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            animation: slideDown 0.5s ease;
+            border-radius: 0 0 var(--curve-radius) var(--curve-radius); /* Curved bottom edges */
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #000000;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-weight: 700;
+            color: #000000;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 25px;
+            height: 18px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            height: 2px;
+            width: 100%;
+            background: #000000;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            padding: 60px 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(216, 27, 96, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(216, 27, 96, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+            border-radius: var(--curve-radius); /* Curved edges */
+            margin: 10px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(212, 175, 55, 0.03) 10px,
+                rgba(212, 175, 55, 0.03) 20px
+            );
+            animation: movePattern 20s linear infinite;
+            border-radius: var(--curve-radius); /* Curved edges for pattern */
+        }
+
+        @keyframes movePattern {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+            padding: 0 10px;
+        }
+
+        .hero h1 {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .hero p {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 1.2rem;
+            color: var(--text);
+            max-width: 100%;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        .shayeri-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: var(--curve-radius); /* Curved edges */
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            max-width: 100%;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            animation: slideIn 1s ease 0.5s both;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .shayeri-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+            border-radius: var(--curve-radius) var(--curve-radius) 0 0; /* Curved top edges */
+        }
+
+        .shayeri-text {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 1.1rem;
+            line-height: 2;
+            color: var(--text);
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .poet-name {
+            font-family: 'Noto Sans Urdu', sans-serif;
+            font-size: 1rem;
+            color: var(--accent);
+            text-align: left;
+            font-weight: 700;
+        }
+
+        /* Poetry Sections */
+        .poetry-section {
+            padding: 50px 0;
+            background: rgba(255, 255, 255, 0.8);
+            margin: 10px;
+            border-radius: var(--curve-radius); /* Curved edges */
+            backdrop-filter: blur(5px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 0 10px;
+        }
+
+        .section-title h2 {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 80px;
+            height: 3px;
+            background: var(--gradient);
+        }
+
+        .section-title p {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 1rem;
+            color: var(--text);
+            margin-top: 10px;
+        }
+
+        .poetry-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            padding: 0 10px;
+        }
+
+        .poetry-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: var(--curve-radius); /* Curved edges */
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+
+        .poetry-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(216, 27, 96, 0.1) 100%);
+            transition: width 0.3s ease;
+            border-radius: var(--curve-radius); /* Curved edges for overlay */
+        }
+
+        .poetry-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-color: var(--secondary);
+        }
+
+        .poetry-card:hover::before {
+            width: 100%;
+        }
+
+        .poetry-card h3 {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .poetry-card p {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 1rem;
+            color: var(--text);
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .poet-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 12px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .poet-info span {
+            font-family: 'Noto Sans Urdu', sans-serif;
+            color: var(--accent);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .poetry-card .icon {
+            color: var(--secondary);
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .poetry-card:hover .icon {
+            transform: rotate(15deg);
+        }
+
+        /* Footer Styles */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+            position: relative;
+            overflow: hidden;
+            margin: 10px;
+            border-radius: var(--curve-radius); /* Curved edges */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 1;
+            padding: 0 10px;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(255, 255, 255, 0.02) 10px,
+                    rgba(255, 255, 255, 0.02) 20px
+                ),
+                linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            animation: footerPattern 30s linear infinite;
+            border-radius: var(--curve-radius); /* Curved edges for pattern */
+        }
+
+        @keyframes footerPattern {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(100px, 100px);
+            }
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section {
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: var(--curve-radius); /* Curved edges for footer sections */
+            backdrop-filter: blur(5px);
+        }
+
+        .footer-section h3 {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            right: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+        }
+
+        .footer-section p {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-weight: 700;
+            color: #f0f0f0;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-weight: 700;
+            color: #f0f0f0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: inline-block;
+            position: relative;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 1px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--secondary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 15px;
+            text-align: center;
+        }
+
+        .designer-info {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-weight: 700;
+            color: #f0f0f0;
+            font-size: 0.8rem;
+            position: relative;
+            display: inline-block;
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(212, 175, 55, 0);
+            }
+        }
+
+        .designer-info .heart {
+            color: #ff4757;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            :root {
+                --curve-radius: 20px; /* Smaller curve radius for mobile */
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                height: 100vh;
+                background: var(--gradient);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: all 0.3s ease;
+                padding: 20px;
+                border-radius: 0; /* No curve for mobile menu */
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links a {
+                color: white;
+                font-size: 1.1rem;
+                padding: 12px 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+            
+            .hero {
+                margin-top: 60px;
+                padding: 40px 0;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .shayeri-text {
+                font-size: 1rem;
+            }
+            
+            .preloader-percentage {
+                font-size: 1.5rem;
+            }
+            
+            .preloader-icon {
+                font-size: 2.5rem;
+            }
+            
+            .preloader-text {
+                font-size: 1.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+            
+            .poetry-card h3 {
+                font-size: 1.2rem;
+            }
+            
+            .poetry-card p {
+                font-size: 0.95rem;
+            }
+            
+            .footer-section h3 {
+                font-size: 1.2rem;
+            }
+            
+            .footer-section p, .footer-links a, .designer-info {
+                font-size: 0.85rem;
+            }
+            
+            .social-links a {
+                width: 30px;
+                height: 30px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            :root {
+                --curve-radius: 25px; /* Medium curve radius for tablets */
+            }
+            
+            .container {
+                width: 90%;
+                padding: 0 20px;
+            }
+            
+            .poetry-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            
+            .footer-top {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 35px;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.4rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .poetry-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+            }
+            
+            .footer-top {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 40px;
+            }
+            
+            .hero h1 {
+                font-size: 4rem;
+            }
+            
+            .hero p {
+                font-size: 1.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Falling Roses Background -->
+    <div class="roses-container" id="roses-container"></div>
+
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <i class="fas fa-feather-alt preloader-icon"></i>
+            <h2 class="preloader-text">اردو شاعری کی دنیا</h2>
+            <div class="preloader-percentage" id="preloader-percentage">0%</div>
+            <div class="preloader-bar">
+                <div class="preloader-progress" id="preloader-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <i class="fas fa-feather-alt"></i>
+                    اردو شاعری کی دنیا
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#home">صفحہ اول</a></li>
+                    <li><a href="#ghazal">غزل</a></li>
+                    <li><a href="#nazm">نظم</a></li>
+                    <li><a href="#sher">شعر</a></li>
+                    <li><a href="#poets">شاعر</a></li>
+                </ul>
+                <div class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>اردو شاعری کی دنیا</h1>
+                <p>لفظوں کے سمندر میں ڈوب کر محسوس کریں احساسات کی گہرائی</p>
+                
+                <div class="shayeri-card">
+                    <div class="shayeri-text">
+                        
+میں آئینوں سے گر یز کرتے ہوئے
+پہاڑوں کی کوکھ میں سانس لینے والی اداس جھیلوں میں اپنے چہرے کا عکس دیکھوں تو سوچتا ہوں
+-کہ مجھ میں ایسا بھی کیا ہے مر یم<BR>
+تمہاری بے ساختہ محبت زمیں پہ پھیلے ہوئے سمندر کی وُسعتوں سے بھی ماوَرا ہے
+محبتوں کے سمندروں میں بس ایک بحر اِ ہجر ہے جو برا ہے مر یم<BR>
+خلا نوردوں کو جو ستارے مُعاوضے میں مِلے تھے
+وہ انکی روشنی میں یہ سوچتے ہیں
+کہ وقت ہی تو خدا ہے مر یم<BR>
+اور اس تعلّق کی گٹھریوں میں
+رُکی ہوئی ساعتوں سے ہٹ کر
+میرے لیے اور کیا ہے مر یم<BR>
+ابھی بہت وقت ہے کہ ہم وقت دیں ذرا اِک دوسرے کو
+مگر ہم اِک ساتھ رہ کر بھی خوش نہ رہ سکے تو مُعاف کرنا<BR>
+کہ میں نے بچپن ہی دُکھ کی دہلیز پر گزارا
+میں ان چراغوں کا دُکھ ہوں جن کی لوِیں شب اِ انتظار میں بُجھ گئیں<BR>
+مگر ان سے اُٹھنے والا دھواں زمان و مکاں میں پھیلا ہوا ہے اب تک<BR>
+میں کوہساروں اور ان کے جسموں سے بہنے والی ان آبشاروں کا دُکھ ہوں جن کو
+زمیں کے چہروں پر رینگتے رینگتے زمانے گزر گئے ہیں
+جو لوگ دل سے اُتر گئے ہیں<BR>
+کتابیں آنکھوں پہ رکھ کے سوئے تھے مر گئے ہیں
+میں ان کا دُکھ ہوں
+جو جسم خود لَذتی سے اکتا کے آئینوں کی تسلّیوں میں پَلے بڑھے ہیں
+میں ان کا دُکھ ہوں<BR>
+میں گھر سے بھاگے ہوؤں کا دُکھ ہوں
+میں رات جاگے ہوؤں کا دُکھ ہوں
+میں ساحلوں سے بندھی ہوئی کشتیوں کا دُکھ ہوں
+میں لاپتا لڑکیوں کا دُکھ ہوں
+کھلی ہوئی کھڑکیوں کا دُکھ ہوں
+مِٹی ہوئی تختیوں کا دُکھ ہوں
+تھکے ہوئے بادلوں کا دُکھ ہوں
+جلے ہوئے جنگلوں کا دُکھ ہوں
+جو کھُل کر برسی نہیں ہے، میں اس گھٹا کا دُکھ ہوں
+زمیں کا دُکھ ہوں<BR>
+جو شا خ ساون میں پھوٹتی ہے وہ شا خ تم ہو
+جو پینگ بارش کے بعد بن بن کے ٹوٹتی ہے وہ پینگ تم ہو
+تمہارے ہونٹوں سے ساعتوں نے سماعتوں کا سبق لیا ہے
+تمہاری ہی شا خ صندلی سے سمندروں نے نمک لیا ہے
+تمہارا میرا معاملہ ہی جدا ہے مر یم<BR>
+تمہیں تو سب کچھ پتا ہے مر یم<BR>
+<BR>                    </div>
+                    <div class="poet-name">- تہذ یب حا فِی</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ghazal Section -->
+    <section id="ghazal" class="poetry-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>غزل</h2>
+                <p>کلاسیکی اردو شاعری کا سب سے زیادہ مقبول صنف</p>
+            </div>
+            <div class="poetry-grid">
+                <div class="poetry-card">
+                    <h3>محبت کا تعبیر</h3>
+                    <p>
+                        "تمھاری یاد میں رات گزری<br>
+                        آنکھوں سے آنسو بہہ گئے<br>
+                        دل کا ہر لمحہ تڑپا<br>
+                        محبت کی یہ کیا سزا ہے"
+                    </p>
+                    <div class="poet-info">
+                        <span>میر تقی میر</span>
+                        <i class="fas fa-heart icon"></i>
+                    </div>
+                </div>
+                <div class="poetry-card">
+                    <h3>وحشت کا احساس</h3>
+                    <p>
+                        "اکیلے پن کی گہرائیوں میں<br>
+                        خوابوں کی دنیا بنی رہی<br>
+                        تمھاری یاد آئی تو آنسو<br>
+                        آنکھوں سے بہہ گئے"
+                    </p>
+                    <div class="poet-info">
+                        <span>پریدہ اتھر</span>
+                        <i class="fas fa-heart icon"></i>
+                    </div>
+                </div>
+                <div class="poetry-card">
+                    <h3>عشق کی آگ</h3>
+                    <p>
+                        "دل میں عشق کی آگ لگی<br>
+                        ہر لمحہ تڑپنے لگا<br>
+                        تمھارے پیار کی یاد میں<br>
+                        زندگی کا مطلب پا گیا"
+                    </p>
+                    <div class="poet-info">
+                        <span>احمد فراز</span>
+                        <i class="fas fa-heart icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nazm Section -->
+    <section id="nazm" class="poetry-section" style="background: rgba(255, 255, 255, 0.8);">
+        <div class="container">
+            <div class="section-title">
+                <h2>نظم</h2>
+                <p>جدید اور روایتی نظموں کا مجموعہ</p>
+            </div>
+            <div class="poetry-grid">
+                <div class="poetry-card">
+                    <h3>وطن کی محبت</h3>
+                    <p>
+                        "میری پہچان میرا وطن ہے<br>
+                        میری شان میرا وطن ہے<br>
+                        اس کی خاک سے ہے میرا تعلق<br>
+                        اس کی ہوا میں ہے میرا وجود"
+                    </p>
+                    <div class="poet-info">
+                        <span>حفظ جالندھری</span>
+                        <i class="fas fa-heart icon"></i>
+                    </div>
+                </div>
+                <div class="poetry-card">
+                    <h3>زندگی کا سفر</h3>
+                    <p>
+                        "زندگی ایک سفر ہے طویل<br>
+                        ہر منزل نئی کہانی ہے<br>
+                        خوشیوں کے رنگ گھلے ہیں<br>
+                غموں کے سائے چھائے ہیں"
+                    </p>
+                    <div class="poet-info">
+                        <span>جون ایلیا</span>
+                        <i class="fas fa-heart icon"></i>
+                    </div>
+                </div>
+                <div class="poetry-card">
+                    <h3>امید کی کرن</h3>
+                    <p>
+                        "اندھیرے میں بھی امید کی کرن روشن ہے<br>
+                        تاریکیوں میں بھی روشنی کی تلاش ہے<br>
+                        زندگی ہر لمحہ نئی شروعات کا نام ہے<br>
+                        ہر صبح نئی امید لے کر آتی ہے"
+                    </p>
+                    <div class="poet-info">
+                        <span>پرویز شاہد</span>
+                        <i class="fas fa-heart icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-top">
+                    <div class="footer-section">
+                        <h3>اردو شاعری کی دنیا</h3>
+                        <p>اردو شاعری کے خزانے کو آپ تک پہنچانے کا ایک منفرد پلیٹ فارم۔ یہاں آپ کو کلاسیکی اور جدید دونوں قسم کی شاعری ملے گی۔</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-section">
+                        <h3>شاعری کی اقسام</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">غزل</a></li>
+                            <li><a href="#">نظم</a></li>
+                            <li><a href="#">رباعی</a></li>
+                            <li><a href="#">قطعہ</a></li>
+                            <li><a href="#">مسدس</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>مشہور شاعر</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">علامہ اقبال</a></li>
+                            <li><a href="#">میر تقی میر</a></li>
+                            <li><a href="#">میرزا غالب</a></li>
+                            <li><a href="#">فیض احمد فیض</a></li>
+                            <li><a href="#">پریدہ اتھر</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>رابطہ کریں</h3>
+                        <p>ہم سے رابطہ کرنے کے لیے درج ذیل معلومات استعمال کریں۔</p>
+                        <ul class="footer-links">
+                            <li><a href="#">ای میل: it.ashraf53@gmail.com</a></li>
+                            <li><a href="#">فون: 0097431656503</a></li>
+                            <li><a href="#">پتہ: مقیم حال ۔ دوحہ قطر  </a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="designer-info">
+                        Designed by <span style="color: var(--secondary);">Mohammad Ashraf</span> 
+                        2025
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Falling Roses Effect
+        const rosesContainer = document.getElementById('roses-container');
+        const roseSymbols = ['🌹', '🌺', '🌸', '🌼', '🌷'];
+        
+        function createRose() {
+            const rose = document.createElement('div');
+            rose.className = 'rose';
+            
+            // Random rose symbol
+            const randomRose = roseSymbols[Math.floor(Math.random() * roseSymbols.length)];
+            rose.textContent = randomRose;
+            
+            // Random position
+            rose.style.left = Math.random() * 100 + '%';
+            
+            // Random size
+            const size = Math.random() * 15 + 10; // Smaller size for mobile
+            rose.style.fontSize = size + 'px';
+            
+            // Random animation duration
+            const duration = Math.random() * 8 + 7; // Faster animation for mobile
+            rose.style.animationDuration = duration + 's';
+            
+            // Random opacity
+            rose.style.opacity = Math.random() * 0.4 + 0.2; // Lower opacity for mobile
+            
+            // Random rotation
+            const rotation = Math.random() * 360;
+            rose.style.transform = `rotate(${rotation}deg)`;
+            
+            rosesContainer.appendChild(rose);
+            
+            // Remove rose after animation
+            setTimeout(() => {
+                rose.remove();
+            }, duration * 1000);
+        }
+        
+        // Create roses periodically - slower for mobile
+        const roseInterval = window.innerWidth < 768 ? 500 : 300;
+        setInterval(createRose, roseInterval);
+        
+        // Preloader with percentage
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            const preloaderPercentage = document.getElementById('preloader-percentage');
+            const preloaderProgress = document.getElementById('preloader-progress');
+            
+            let percentage = 0;
+            const interval = setInterval(() => {
+                percentage += Math.floor(Math.random() * 12) + 2; // Faster loading for mobile
+                
+                if (percentage > 100) {
+                    percentage = 100;
+                }
+                
+                preloaderPercentage.textContent = percentage + '%';
+                preloaderProgress.style.width = percentage + '%';
+                
+                if (percentage >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        preloader.classList.add('hidden');
+                    }, 300);
+                }
+            }, 80); // Faster update for mobile
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - (window.innerWidth < 768 ? 60 : 80);
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add animation to elements when they come into view
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all poetry cards
+        document.querySelectorAll('.poetry-card').forEach(card => {
+            observer.observe(card);
+        });
+        
+        // Add interactive hover effect to poetry cards (only for desktop)
+        if (window.innerWidth > 768) {
+            document.querySelectorAll('.poetry-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        }
+        
+        // Add typing effect to hero text
+        const heroText = document.querySelector('.hero p');
+        const text = heroText.textContent;
+        heroText.textContent = '';
+        let index = 0;
+        
+        function typeWriter() {
+            if (index < text.length) {
+                heroText.textContent += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, 30); // Faster typing for mobile
+            }
+        }
+        
+        // Start typing effect when page loads
+        window.addEventListener('load', () => {
+            setTimeout(typeWriter, 800);
+        });
+        
+        // Add parallax effect to hero section (only for desktop)
+        if (window.innerWidth > 768) {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const hero = document.querySelector('.hero');
+                hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+            });
+        }
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            // Adjust rose creation interval based on screen size
+            const newInterval = window.innerWidth < 768 ? 500 : 300;
+            clearInterval(window.roseInterval);
+            window.roseInterval = setInterval(createRose, newInterval);
+            
+            // Re-attach hover effects if screen size changes
+            if (window.innerWidth > 768) {
+                document.querySelectorAll('.poetry-card').forEach(card => {
+                    card.addEventListener('mouseenter', function() {
+                        this.style.transform = 'translateY(-5px) scale(1.02)';
+                    });
+                    
+                    card.addEventListener('mouseleave', function() {
+                        this.style.transform = 'translateY(0) scale(1)';
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
